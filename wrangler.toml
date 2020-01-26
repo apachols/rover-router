@@ -1,0 +1,6 @@
+name = "rover-router"
+type = "webpack"
+account_id = "35c1e4940c68910c6121efea6fd7f2c4"
+workers_dev = true
+route = ""
+zone_id = ""
