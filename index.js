@@ -1,19 +1,5 @@
 const Router = require('./router')
 
-// async function handleRequest(request) {
-//     const r = new Router()
-//     // Replace with the approriate paths and handlers
-//     r.get('.*/bar', () => new Response('responding for /bar'))
-//     r.get('.*/foo', req => handler(req))
-//     r.post('.*/foo.*', req => handler(req))
-//     r.get('/demos/router/foo', req => fetch(req)) // return the response from the origin
-
-//     r.get('/', () => new Response('Hello worker!')) // return a default message for the root route
-
-//     const resp = await r.route(request)
-//     return resp
-// }
-
 /*
  *  Request Transforms
  */
@@ -38,7 +24,7 @@ const respondWithEcho = request => {
         // Serve a response from a flask server that echos the HTTP request
         return respondWithProductionEcho(request)
     } catch (err) {
-        // Cannot do subdomain transform in development playgroup, so just echo
+        // Cannot do subdomain transform in development playground, so just echo
         console.log(err)
         return respondWithDevelopmentEcho(request)
     }
@@ -75,9 +61,10 @@ async function handleRequest(request) {
 
     const r = new Router()
 
-    r.get('.*', respondWithEcho)
-    r.post('.*', respondWithEcho)
+    r.get('.*/static', () => new Response('static response'))
+    r.get('.*/pass', rq => fetch(rq))
+    r.all(respondWithEcho)
 
-    const response = await r.route(request)
+    const response = await r.route(withTrustScore)
     return response
 }
