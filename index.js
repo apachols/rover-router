@@ -75,7 +75,6 @@ async function handleRequest(request) {
 
     const r = new Router()
 
-    r.get('/', () => new Response('Hello worker!'))
     r.get('.*', respondWithEcho)
     r.post('.*', respondWithEcho)
 
