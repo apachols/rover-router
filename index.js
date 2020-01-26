@@ -47,7 +47,7 @@ const respondWithEcho = request => {
 const respondWithProductionEcho = request => {
     const url = new URL(request.url)
 
-    url.host = url.host.replace('worker.adampacholski', 'echo.adampacholski')
+    url.host = url.host.replace('rover.adampacholski', 'echo.adampacholski')
     if (url.toString() === request.url) {
         throw new Error('Development environment has no echo server')
     }
